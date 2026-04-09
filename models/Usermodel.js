@@ -7,6 +7,6 @@ const userSchema = new mongoose.Schema({
     creditBalance: { type: Number, default: 3 },
 })
 
-const usermodel = mongoose.models.user || mongoose.model("user", userSchema)
+const userModel = mongoose.models.user || mongoose.model("user", userSchema)
 
-export default usermodel;
+export default userModel;

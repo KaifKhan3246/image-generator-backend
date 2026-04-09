@@ -1,7 +1,7 @@
 import axios from 'axios'
 import fs from 'fs'
 import FormData from 'form-data'
-import usermodel from '../models/Usermodel.js'
+import userModel from '../models/Usermodel.js'
 
 // Controller function to generate image from prompt
 // http://localhost:4000/api/image/generate-image
@@ -12,14 +12,14 @@ export const generateImage = async (req, res) => {
     const userId = req.body?.userId || req.userId
 
     // Fetching User Details Using userId
-    const user = await usermodel.findById(userId)
+    const user = await userModel.findById(userId)
     
     if (!user || !prompt) {
       return res.json({ success: false, message: 'Missing Details' })
     }
 
     // Checking User creditBalance
-    if (user.creditBalance === 0 || usermodel.creditBalance < 0) {
+    if (user.creditBalance === 0 || userModel.creditBalance < 0) {
       return res.json({ success: false, message: 'No Credit Balance', creditBalance: user.creditBalance })
     }
 
