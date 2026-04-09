@@ -12,7 +12,11 @@ await connectDB()
 
 // Intialize Middlewares
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: 'https://text-to-image-frontend-one.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 // API routes
 app.use('/api/user',userRouter)
