@@ -1,4 +1,4 @@
-import userModel from "../models/userModel.js"
+import usermodel from "../models/usermodel.js"
 import transactionModel from "../models/transactionModel.js"
 import razorpay from 'razorpay';
 import bcrypt from 'bcrypt'

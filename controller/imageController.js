@@ -1,7 +1,7 @@
 import axios from 'axios'
 import fs from 'fs'
 import FormData from 'form-data'
-import userModel from '../models/Usermodel.js'
+import usermodel from '../models/Usermodel.js'
 
 // Controller function to generate image from prompt
 // http://localhost:4000/api/image/generate-image
