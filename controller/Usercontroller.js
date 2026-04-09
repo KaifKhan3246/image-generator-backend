@@ -26,7 +26,7 @@ const registerUser = async (req, res) => {
             password: hashedPassword,
         }
 
-        const newUser = new userModel(userData)
+        const newUser = new usermodel(userData)
         const user = await newUser.save()
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
@@ -44,7 +44,7 @@ const loginUser = async (req, res) => {
 
     try {
         const { email, password } = req.body;
-        const user = await userModel.findOne({ email })
+        const user = await usermodel.findOne({ email })
 
         if (!user) {
             return res.json({ success: false, message: "User does not exist" })
@@ -72,7 +72,7 @@ const userCredits = async (req, res) => {
         const userId = req.userId
 
         // Fetching userdata using userId
-        const user = await userModel.findById(userId)
+        const user = await usermodel.findById(userId)
         res.json({ success: true, credits: user.creditBalance, user: { name: user.name } })
 
     } catch (error) {
@@ -95,7 +95,7 @@ const paymentRazorpay = async (req, res) => {
         const { planId } = req.body
         const userId = req.userId
 
-        const userData = await userModel.findById(userId)
+        const userData = await usermodel.findById(userId)
 
         // checking for planId and userdata
         if (!userData || !planId) {
@@ -181,9 +181,9 @@ const verifyRazorpay = async (req, res) => {
             }
 
             // Adding Credits in user data
-            const userData = await userModel.findById(transactionData.userId)
+            const userData = await usermodel.findById(transactionData.userId)
             const creditBalance = userData.creditBalance + transactionData.credits
-            await userModel.findByIdAndUpdate(userData._id, { creditBalance })
+            await usermodel.findByIdAndUpdate(userData._id, { creditBalance })
 
             // Marking the payment true 
             await transactionModel.findByIdAndUpdate(transactionData._id, { payment: true })
@@ -211,7 +211,7 @@ const paymentStripe = async (req, res) => {
         const userId = req.userId
         const { origin } = req.headers
 
-        const userData = await userModel.findById(userId)
+        const userData = await usermodel.findById(userId)
 
         // checking for planId and userdata
         if (!userData || !planId) {
@@ -301,9 +301,9 @@ const verifyStripe = async (req, res) => {
             }
 
             // Adding Credits in user data
-            const userData = await userModel.findById(transactionData.userId)
+            const userData = await usermodel.findById(transactionData.userId)
             const creditBalance = userData.creditBalance + transactionData.credits
-            await userModel.findByIdAndUpdate(userData._id, { creditBalance })
+            await usermodel.findByIdAndUpdate(userData._id, { creditBalance })
 
             // Marking the payment true 
             await transactionModel.findByIdAndUpdate(transactionData._id, { payment: true })

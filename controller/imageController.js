@@ -12,14 +12,14 @@ export const generateImage = async (req, res) => {
     const userId = req.body?.userId || req.userId
 
     // Fetching User Details Using userId
-    const user = await userModel.findById(userId)
+    const user = await usermodel.findById(userId)
     
     if (!user || !prompt) {
       return res.json({ success: false, message: 'Missing Details' })
     }
 
     // Checking User creditBalance
-    if (user.creditBalance === 0 || userModel.creditBalance < 0) {
+    if (user.creditBalance === 0 || usermodel.creditBalance < 0) {
       return res.json({ success: false, message: 'No Credit Balance', creditBalance: user.creditBalance })
     }
 
