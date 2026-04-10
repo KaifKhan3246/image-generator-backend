@@ -1,7 +1,7 @@
 import axios from 'axios'
 import fs from 'fs'
 import FormData from 'form-data'
-import userModel from '../models/Usermodel.js'
+import userModel from '../models/userModel.js'
 
 // Controller function to generate image from prompt
 // http://localhost:4000/api/image/generate-image
@@ -19,8 +19,8 @@ export const generateImage = async (req, res) => {
     }
 
     // Checking User creditBalance
-    if (user.creditBalance === 0 || userModel.creditBalance < 0) {
-      return res.json({ success: false, message: 'No Credit Balance', creditBalance: user.creditBalance })
+    if (user.creditBalance <= 0) {
+      return res.json({ success: false, message: 'No Credit Balance', creditBalance: 0 })
     }
 
     // Creation of new multi/part formdata
@@ -40,10 +40,10 @@ export const generateImage = async (req, res) => {
     const resultImage = `data:image/png;base64,${base64Image}`
 
     // Deduction of user credit 
-    await userModel.findByIdAndUpdate(user._id, { creditBalance: user.creditBalance - 1 })
+    const updatedUser = await userModel.findByIdAndUpdate(user._id, { $inc: { creditBalance: -1 } }, { new: true })
 
     // Sending Response
-    res.json({ success: true, message: "Background Removed", resultImage, creditBalance: user.creditBalance - 1 })
+    res.json({ success: true, message: "Background Removed", resultImage, creditBalance: updatedUser.creditBalance })
 
   } catch (error) {
     console.log(error.message)
