@@ -7,7 +7,7 @@ import {
     loginUser,
     paymentStripe,
     verifyStripe
-} from '../controller/Usercontroller.js'
+} from '../controller/userController.js'
 import authUser from '../middleware/auth.js'
 
 const userRouter = express.Router()
