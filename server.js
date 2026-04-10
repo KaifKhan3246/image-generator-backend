@@ -13,15 +13,15 @@ await connectDB()
 // Intialize Middlewares
 app.use(express.json())
 app.use(cors({
-  origin: 'https://imagifys-one.vercel.app',
+  origin: 'https://text-to-image-frontend-nu.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
 
 // API routes
-app.use('/api/user',userRouter)
-app.use('/api/image',imageRouter)
+app.use('/api/user', userRouter)
+app.use('/api/image', imageRouter)
 
-app.get('/', (req,res) => res.send("API Working"))
+app.get('/', (req, res) => res.send("API Working"))
 
-app.listen(PORT, () => console.log('Server running on port ' + PORT));
+app.listen(PORT, () => console.log('Server running on port http://localhost:' + PORT));
