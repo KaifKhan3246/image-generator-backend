@@ -1,6 +1,6 @@
 import express from 'express'
-import { generateImage } from '../controller/imageController.js'
-import authUser from '../middleware/auth.js'
+import { generateImage } from '../controller/imageControllers.js'
+import authUser from '../middleware/auths.js'
 
 const imageRouter = express.Router()
 

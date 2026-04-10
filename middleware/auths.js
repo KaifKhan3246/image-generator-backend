@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 const authUser = async (req, res, next) => {
     // Extract the token from headers
     const { token } = req.headers;
-
+    
     // Check if the token is missing
     if (!token) {
         return res.json({ success: false, message: 'Not Authorized. Login Again' });
